@@ -1,16 +1,16 @@
-cabal-version: 2.2
-name: actus-core
-version: 0.1.0.0
-license: Apache-2.0
+cabal-version:   2.2
+name:            actus-core
+version:         0.1.0.0
+license:         Apache-2.0
 license-files:
   LICENSE
   NOTICE
-build-type: Simple
-maintainer: Yves Hauser <yves.hauser@iohk.io>
-stability: experimental
-author: Dmytro Kondratiuk, Yves Hauser
-synopsis:
-  ACTUS taxonomy
+
+build-type:      Simple
+maintainer:      Yves Hauser <yves.hauser@iohk.io>
+stability:       experimental
+author:          Dmytro Kondratiuk, Yves Hauser
+synopsis:        ACTUS taxonomy
 description:
   /actus-core/ is an implementation of the [ACTUS](https://www.actusfrf.org)
   specification in Haskell.
@@ -24,44 +24,53 @@ description:
   The implementation is tested against the [reference test cases](https://github.com/actusfrf/actus-tests) provided by the
   ACTUS foundation.
 
-category: Language
+category:        Language
 extra-doc-files: README.md
 
 source-repository head
-  type: git
-  location: https://github.com/input-output-hk/actus-core
+  type:     git
+  location: https://github.com/marlowe-lang/actus-core
 
 flag defer-plugin-errors
   description:
-      Defer errors from the plugin, useful for things like Haddock that can't handle it.
-  default: False
-  manual: True
+    Defer errors from the plugin, useful for things like Haddock that can't handle it.
+
+  default:     False
+  manual:      True
 
 library
-  hs-source-dirs: src
+  hs-source-dirs:     src
   build-depends:
-    aeson -any,
-    base -any,
-    mtl -any,
-    sort -any,
-    lens -any,
-    text -any,
-    time -any,
-    validation -any
-  default-language: Haskell2010
-  default-extensions: ExplicitForAll ScopedTypeVariables
-                      DeriveGeneric StandaloneDeriving DeriveLift
-                      DeriveFunctor DeriveFoldable
-                      DeriveTraversable
+    , aeson
+    , base
+    , lens
+    , mtl
+    , sort
+    , text
+    , time
+    , validation
+
+  default-language:   Haskell2010
+  default-extensions:
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    ExplicitForAll
+    ScopedTypeVariables
+    StandaloneDeriving
+
   exposed-modules:
     Actus.Core
     Actus.Domain
     Actus.Model
     Actus.Utility
+
   other-modules:
     Actus.Domain.BusinessEvents
-    Actus.Domain.ContractTerms
     Actus.Domain.ContractState
+    Actus.Domain.ContractTerms
     Actus.Domain.Schedule
     Actus.Model.Applicability
     Actus.Model.ContractSchedule
@@ -72,6 +81,7 @@ library
     Actus.Utility.DateShift
     Actus.Utility.ScheduleGenerator
     Actus.Utility.YearFraction
+
   ghc-options:
     -Wall -Wnoncanonical-monad-instances -Wunused-packages
     -Wincomplete-uni-patterns -Wincomplete-record-updates
@@ -79,28 +89,27 @@ library
 
 test-suite actus-core-test
   default-language: Haskell2010
-  hs-source-dirs: test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-    Spec.TestFramework
+  hs-source-dirs:   test
+  type:             exitcode-stdio-1.0
+  main-is:          Spec.hs
+  other-modules:    Spec.TestFramework
   build-depends:
-    actus-core,
-    aeson -any,
-    base >=4.9 && <5,
-    bytestring -any,
-    containers -any,
-    lens -any,
-    mtl -any,
-    pretty-simple -any,
-    sort -any,
-    tasty -any,
-    tasty-hunit -any,
-    tasty-quickcheck -any,
-    text -any,
-    time -any,
-    validation -any,
+    , actus-core
+    , aeson
+    , base              >=4.9 && <5
+    , bytestring
+    , containers
+    , lens
+    , mtl
+    , pretty-simple
+    , sort
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+    , text
+    , time
+    , validation
+
   ghc-options:
-    -Wall -Wnoncanonical-monad-instances
-    -Wincomplete-uni-patterns -Wincomplete-record-updates
-    -Wredundant-constraints -Widentities
+    -Wall -Wnoncanonical-monad-instances -Wincomplete-uni-patterns
+    -Wincomplete-record-updates -Wredundant-constraints -Widentities
